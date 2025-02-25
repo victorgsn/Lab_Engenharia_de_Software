@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Par ou ímpar</title>
 </head>
 <body>
-    
+    <script language="Javascript" type="text/Javascript">
+        let x=prompt("Entre com um número inteiro","");
+        let aux = x%2;
+        switch(aux){
+            case 0:
+                alert("Número par");
+                break;
+            case 1:
+                alert("Número ímpar");
+                break;
+            default:
+                alert("Valor inválido");
+            }
+    </script>
 </body>
 </html>
