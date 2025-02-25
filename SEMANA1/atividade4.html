@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação de dado</title>
+</head>
+<body>
+    <script language="Javascript" type="text/Javascript">
+        let dado = prompt("Digite algo: ");
+        let resposta = prompt("Você deseja verificar que o tipo da informação que foi digitada?");
+        
+        if (!isNaN(dado) && dado.trim() !== "") {
+            dado = Number(dado); 
+        } else if (dado.toLowerCase() === "true" || dado.toLowerCase() === "false") {
+            dado = (dado.toLowerCase() === "true"); 
+        }
+
+        if (resposta.toLowerCase() === "sim") {
+            document.body.innerHTML = "O tipo de informação é: " + typeof dado;
+        } else {
+            document.body.innerHTML = "Obrigado por visitar a página!!";
+        }
+        
+    </script>
+</body>
+</html>
