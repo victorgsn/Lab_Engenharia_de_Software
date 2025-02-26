@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data atual</title>    
+</head>
+<body>
+    <script>
+        let data = new Date();
+        let diasSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+        let mesesAno = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+        let diaSemana = diasSemana[data.getDay()];
+        let dia = data.getDate(); 
+        let mes = mesesAno[data.getMonth()]; 
+        let ano = data.getFullYear(); 
+        let dataFormatada = `${diaSemana}, ${dia} de ${mes} de ${ano}`;
+        document.body.innerHTML = dataFormatada;
+    </script>
+</body>
+</html>
