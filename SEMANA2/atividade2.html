@@ -3,35 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horário atual</title>    
+    <title>Horário e dia atual</title>    
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .relogio-digital {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            background: #ecf0f1;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .relogio-analogico {
+            width: 150px;
+            height: 150px;
+            border: 8px solid #2c3e50;
+            border-radius: 50%;
+            position: relative;
+            background: white;
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ponteiro {
+            position: absolute;
+            background: #2c3e50;
+            transform-origin: bottom;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .horas {
+            width: 6px;
+            height: 35px;
+            top: 40px;
+            border-radius: 4px;
+        }
+
+        .minutos {
+            width: 4px;
+            height: 50px;
+            top: 25px;
+            border-radius: 4px;
+        }
+
+        .segundos {
+            width: 2px;
+            height: 60px;
+            top: 15px;
+            background: red;
+            border-radius: 2px;
+        }
+
+        .centro {
+            width: 12px;
+            height: 12px;
+            background: #2c3e50;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .numero {
+            position: absolute;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .num-12 { top: 5px; left: 50%; transform: translateX(-50%); }
+        .num-3 { right: 5px; top: 50%; transform: translateY(-50%); }
+        .num-6 { bottom: 5px; left: 50%; transform: translateX(-50%); }
+        .num-9 { left: 5px; top: 50%; transform: translateY(-50%); }
+
+    </style>    
 </head>
 <body>
-    <script language="JavaScript" type="text/JavaScript">
-        
+    <div class="relogio-digital"></div>
+    
+    <div class="relogio-analogico">
+    
+        <div class="ponteiro horas"></div>
+        <div class="ponteiro minutos"></div>
+        <div class="ponteiro segundos"></div>
+        <div class="centro"></div>
+
+       
+        <div class="numero num-12">12</div>
+        <div class="numero num-3">3</div>
+        <div class="numero num-6">6</div>
+        <div class="numero num-9">9</div>
+    </div>
+
+    <script>
         function AtualizarHora() {
-            
-        let data = new Date();
-        let diasSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
-        let mesesAno = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-        
-        let diaSemana = diasSemana[data.getDay()];
-        let dia = data.getDate(); 
-        let mes = mesesAno[data.getMonth()]; 
-        let ano = data.getFullYear(); 
-        
-        let horas = data.getHours().toString().padStart(2, '0');
-        let minutos = data.getMinutes().toString().padStart(2, '0');
-        let segundos = data.getSeconds().toString().padStart(2, '0');
+            let data = new Date();
+            let diasSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+            let mesesAno = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
-        let dataFormatada = `${diaSemana}, ${dia} de ${mes} de ${ano} - ${horas}:${minutos}:${segundos}`;
+            let diaSemana = diasSemana[data.getDay()];
+            let dia = data.getDate(); 
+            let mes = mesesAno[data.getMonth()]; 
+            let ano = data.getFullYear(); 
 
-        document.body.innerHTML = dataFormatada;
+            let horas = data.getHours().toString().padStart(2, '0');
+            let minutos = data.getMinutes().toString().padStart(2, '0');
+            let segundos = data.getSeconds().toString().padStart(2, '0');
 
-        setTimeout(atualizarDataHora, 1000);
+            let dataFormatada = `${diaSemana}, ${dia} de ${mes} de ${ano} - ${horas}:${minutos}:${segundos}`;
+
+            document.querySelector(".relogio-digital").textContent = dataFormatada;
+
+         
+            let grauHora = (data.getHours() % 12) * 30 + data.getMinutes() * 0.5;
+            let grauMinuto = data.getMinutes() * 6 + data.getSeconds() * 0.1;
+            let grauSegundo = data.getSeconds() * 6;
+
+            document.querySelector(".horas").style.transform = `rotate(${grauHora}deg)`;
+            document.querySelector(".minutos").style.transform = `rotate(${grauMinuto}deg)`;
+            document.querySelector(".segundos").style.transform = `rotate(${grauSegundo}deg)`;
+
+            setTimeout(AtualizarHora, 1000);
         }
-        
-        AtualizarHora();
 
+        AtualizarHora();
     </script>
+
 </body>
 </html>
+
+ 
